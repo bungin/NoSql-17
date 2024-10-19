@@ -1,4 +1,4 @@
-import { Schema, Types, model, type Document } from 'mongoose';
+import { Schema, model, type Document } from 'mongoose';
 
 interface IUser extends Document {
   username: string;
@@ -40,6 +40,11 @@ const userSchema = new Schema<IUser>({
 {
     timestamps: true,
     toJSON: {
-        virtuals: true
+        virtuals: true,
+        getters: true //do i need this? research
     }
 })
+
+const User = model<IUser>('User', userSchema);
+
+export default User;
