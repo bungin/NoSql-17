@@ -12,7 +12,9 @@ const userSchema = new Schema<IUser>({
         type: String,
         required: true, 
         unique: true,
-        trim: true
+        trim: true,
+        maxlength: 35,
+        minlength: 2
     },
     email: {
         type: String,
@@ -43,7 +45,11 @@ const userSchema = new Schema<IUser>({
         virtuals: true,
         getters: true //do i need this? research
     }
-})
+});
+
+userSchema.virtual('friendCount').get(function() {
+    return this.friends.length;
+});
 
 const User = model<IUser>('User', userSchema);
 
