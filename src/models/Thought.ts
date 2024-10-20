@@ -1,4 +1,3 @@
-import e from "express";
 import { Schema, model, type Document } from "mongoose";
 
 interface IThought extends Document {
