@@ -24,7 +24,7 @@ const userSchema = new Schema<IUser>(
       match: [/.+@.+\..+/, "Please enter a valid email address"],
       // this regex ensures that the string contains at least one
       // char before and after the @ symbol, and at least one char
-      // after a dot in the domain.  regex from copilot, decipheringVVVVV
+      // after a dot in the domain.  regex from copilot; decipheringVVVVV
       // (/starts)(.+ any char)(@ literal)(.+ any char)(\. literal period)(.+ any char)(/close)
     },
     thoughts: [
