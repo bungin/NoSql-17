@@ -7,7 +7,7 @@ import {
   updateUser,
   addFriend,
   removeFriend,
-} from "../../controllers/userController";
+} from "../../controllers/userController.js";
 const router = Router();
 
 router.route("/").get(getUsers).post(createUser);

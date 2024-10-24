@@ -1,6 +1,6 @@
-import { ObjectId } from "mongodb";
-import { Request, response, Response } from "express";
-import { Thought, User } from "../models";
+import { Request, Response } from "express";
+import Thought from "../models/Thought.js";
+import User from "../models/User.js";
 
 export const getThoughts = async (_req: Request, res: Response) => {
   try {
@@ -24,13 +24,14 @@ export const createThought = async (req: Request, res: Response) => {
   try {
     const newThought = await Thought.create(req.body);
     const thoughtId = newThought._id;
+    console.log(thoughtId);
     const updatedUser = await User.findOneAndUpdate(
       { _id: req.body.userId },
       { $push: { thoughtText: newThought } },
       { new: true }
     );
     res.status(201).json(updatedUser); //needed?
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ message: err.message });
   }
 };
@@ -80,9 +81,9 @@ export const addReaction = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "No thought found with this id!" });
         }
 
-        res.json(updatedThought);
+        return res.json(updatedThought);
     } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 };
 
@@ -98,8 +99,8 @@ export const deleteReaction = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "No thought found with this id!" });
         }
 
-        res.json(updatedThought);
+        return res.json(updatedThought);
     } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 };

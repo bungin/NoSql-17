@@ -1,4 +1,4 @@
-import User from "../models/User";
+import User from "../models/User.js";
 import { Request, Response } from "express";
 
 export const getUsers = async (_req: Request, res: Response) => {
@@ -39,8 +39,9 @@ export const updateUser = async (req: Request, res: Response) => {
       { _id: req.params.userId },
       { $set: req.body }
     );
+    return res.json(user);
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -48,13 +49,13 @@ export const deleteUser = async (req: Request, res: Response) => {
   try {
     const user = await User.findOneAndDelete({ _id: req.params.userId });
     if (!user) {
-      res.status(404).json({ message: "No user found with this id!" });
+      return res.status(404).json({ message: "No user found with this id!" });
     }
 
     return res.json({ message: "User successfully deleted!" });
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -70,9 +71,9 @@ export const addFriend = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "No user found with this id!" });
         }
 
-        res.json(user);
+        return res.json(user);
     } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 };
 
@@ -88,8 +89,8 @@ export const removeFriend = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "No user found with this id!" });
         }
 
-        res.json(user);
+        return res.json(user);
     } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 };

@@ -1,4 +1,5 @@
-import { Schema, model, Types, type Document } from "mongoose";
+import { Schema, model, Types, Document } from "mongoose"; // Types
+// import mongoose from "mongoose";
 
 interface IThought extends Document {
   thoughtText: string;
@@ -33,7 +34,19 @@ const thoughtSchema = new Schema<IThought>(
   }
 );
 
-const reactionSchema = new Schema({
+interface IReact extends Document {
+    reactionId: Schema.Types.ObjectId;
+    reactionBody: string;
+    username: string;
+    createdAt: Date;
+}
+// // CHANGES: added IReact interface to attempt to fix:
+// C:\Users\N\bootcamp\homework\17\node_modules\mongoose\lib\schema.js:740
+//       throw new TypeError(`Invalid schema configuration: \`${val}\` is not ` +
+//             ^
+// TypeError: Invalid schema configuration: `true` is not a valid type at path `virtuals`. 
+// See https://bit.ly/mongoose-schematypes for a list of valid schema types.
+const reactionSchema = new Schema<IReact>({
   reactionId: {
     type: Schema.Types.ObjectId,
     default: () => new Types.ObjectId(),
@@ -57,6 +70,8 @@ const reactionSchema = new Schema({
     getters: true,
   },
 });
+
+console.log(reactionSchema); //TODO: fix this shit
 
 thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;

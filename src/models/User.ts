@@ -1,4 +1,5 @@
 import { Schema, model, type Document } from "mongoose";
+import mongoose from "mongoose";
 
 interface IUser extends Document {
   username: string;
@@ -7,7 +8,7 @@ interface IUser extends Document {
   friends: Schema.Types.ObjectId[];
 }
 
-const userSchema = new Schema<IUser>(
+const userSchema = new mongoose.Schema<IUser>(
   {
     username: {
       type: String,
