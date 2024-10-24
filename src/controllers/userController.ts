@@ -22,4 +22,13 @@ export const getSingleUser = async (req: Request, res: Response) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  }
+  };
+
+  export const createUser = async (req: Request, res: Response) => {
+    try {
+        const dbUserData = await User.create(req.body);
+        res.json(dbUserData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+  };
