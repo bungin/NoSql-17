@@ -50,6 +50,7 @@ const reactionSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+    get: (timestamp: Date) => timestamp.toDateString(),
   },
   toJSON: {
     virtuals: true,
