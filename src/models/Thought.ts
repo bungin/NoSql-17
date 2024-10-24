@@ -56,8 +56,9 @@ const reactionSchema = new Schema({
     required: [true, "Please enter a reaction!"],
     maxlength: 280,
   },
-  username: {
+  username: { //does this ref with User?
     type: String,
+    // ref: "User",
     required: true,
   },
   createdAt: {
