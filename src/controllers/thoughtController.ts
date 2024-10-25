@@ -92,7 +92,7 @@ export const addReaction = async (req: Request, res: Response) => {
     try {
         const updatedThought = await Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $push: { reactions: req.body, reactionId: req.params.reactionId } },
+            { $push: { reactions: req.body } },
             { new: true }
         );
 

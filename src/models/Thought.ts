@@ -1,4 +1,4 @@
-import { Schema, model, Types, Document } from "mongoose"; // Types
+import { Schema, model, Document } from "mongoose"; // Types
 // import mongoose from "mongoose";
 
 interface IThought extends Document {
@@ -9,10 +9,6 @@ interface IThought extends Document {
 }
 
 const reactionSchema = new Schema({
-  reactionId: {
-    type: Schema.Types.ObjectId,
-    default: () => new Types.ObjectId(),
-  },
   reactionBody: {
     type: String,
     required: [true, "Please enter a reaction!"],
@@ -55,9 +51,6 @@ const thoughtSchema = new Schema<IThought>(
     },
   }
 );
-
-
-// console.log(reactionSchema); //TODO: fix this shit
 
 thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
