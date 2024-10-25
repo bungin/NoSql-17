@@ -13,6 +13,6 @@ const router = Router();
 
 router.route("/").get(getThoughts).post(createThought);
 router.route("/:thoughtId").get(getThoughtById).put(updateThought).delete(deleteThought);
-router.route("/:thoughtId/reactions").post(addReaction).delete(deleteReaction)
-
+router.route("/:thoughtId/reactions").post(addReaction)
+router.route("/:thoughtId/reactions/:reactionId").delete(deleteReaction)
 export { router as thoughtRoutes }

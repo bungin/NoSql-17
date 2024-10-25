@@ -25,7 +25,7 @@ export const createThought = async (req: Request, res: Response) => {
         const newThought = await Thought.create(req.body);
         const updatedUser = await User.findOneAndUpdate(
             { _id: req.body.userId },
-            { $push: { thoughts: newThought._id } }, // Ensure the field name is 'thoughts'
+            { $push: { thoughts: newThought } },
             { new: true }
         );
 
@@ -92,7 +92,7 @@ export const addReaction = async (req: Request, res: Response) => {
     try {
         const updatedThought = await Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $push: { reactions: req.body } },
+            { $push: { reactions: req.body, reactionId: req.params.reactionId } },
             { new: true }
         );
 
@@ -110,7 +110,7 @@ export const deleteReaction = async (req: Request, res: Response) => {
     try {
         const updatedThought = await Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { $pull: { reactions: { _id: req.params.reactionId } } },
             { new: true }
         );
 
